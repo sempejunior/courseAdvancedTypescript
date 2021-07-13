@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": "src",
+        "strictNullChecks": true,
+        "strict": true
+    }
+}
