@@ -1,4 +1,5 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
+import { LoginHandler } from './LoginHandler';
 import { Utils } from './Utils';
 
 export class Server {
@@ -9,13 +10,21 @@ export class Server {
 
     public createServer() {
         createServer(
-            (req: IncomingMessage, res: ServerResponse) => {
+            async (req: IncomingMessage, res: ServerResponse) => {
                 console.log('got request from:' + req.url);
                 const basePath = Utils.getUrlBasePath(req.url);
                 res.end();
+                switch (basePath) {
+                    case 'login':
+                       await new LoginHandler(req, res).handleRequest();
+                        break;
+
+                    default:
+                        break;
+                }
             }
         ).listen(8080);
         console.log('server started');
     }
 
-}1
+} 1
